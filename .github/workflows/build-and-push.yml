@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.GHCR_Token }}
 
       - name: Build Image
-        run: docker build -t ghcr.io/${{ env.REPO_OWNER_LC }}/$IMAGE_NAME:latest /puppeteer-service
+        run: docker build -t ghcr.io/${{ env.REPO_OWNER_LC }}/$IMAGE_NAME:latest ./puppeteer-service
 
       - name: Run Trivy Vulnerability Scan
         uses: aquasecurity/trivy-action@master
