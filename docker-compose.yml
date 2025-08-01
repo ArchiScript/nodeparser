@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  browserless:
+    image: browserless/chrome:latest
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - puppeteer-net
+    # Exposing port 3000 for internal and external access (scraper to use it)
+    ports:
+      - "3000:3000"  # Browserless service port
+
+  scraper:
+    image: ghcr.io/archiscript/puppeteer-scraper:latest
+    networks:
+      - puppeteer-net
+    depends_on:
+      browserless:
+        condition: service_healthy
+    environment:
+      - WS_ENDPOINT=ws://browserless:3000   # WebSocket connection to browserless
+      - WEBHOOK_SECRET_FILE=/run/secrets/webhook_secret
+    secrets:
+      - webhook_secret
+    # Exposing port 8080 for webhook access
+    ports:
+      - "8080:8080"  # Exposing webhook listener port
+
+networks:
+  puppeteer-net:
+    external: true  # Using an external network for inter-service communication
+
+secrets:
+  webhook_secret:
+    external: true  # Assumes this secret is already created in Portainer or Docker Swarm
