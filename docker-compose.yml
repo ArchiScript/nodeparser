@@ -18,9 +18,6 @@ services:
     image: ghcr.io/archiscript/puppeteer-scraper:latest
     networks:
       - puppeteer-net
-    depends_on:
-      browserless:
-        condition: service_healthy
     environment:
       - WS_ENDPOINT=ws://browserless:3000   # WebSocket connection to browserless
       - WEBHOOK_SECRET_FILE=/run/secrets/webhook_secret
@@ -29,6 +26,12 @@ services:
     # Exposing port 8080 for webhook access
     ports:
       - "8080:8080"  # Exposing webhook listener port
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://browserless:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
 
 networks:
   puppeteer-net:
