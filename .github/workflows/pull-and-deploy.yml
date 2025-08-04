@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    if: false == contains(github.event.head_commit.message, '[build_image]')
+    if: contains(github.event.head_commit.message, '[deploy]')
     runs-on: ubuntu-latest
 
     steps:

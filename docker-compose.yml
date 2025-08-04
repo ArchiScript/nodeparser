@@ -22,7 +22,7 @@ services:
       - WS_ENDPOINT=ws://browserless:3000   # WebSocket connection to browserless
       - WEBHOOK_SECRET_FILE=/run/secrets/webhook_secret
     secrets:
-      - webhook_secret
+      - WEBHOOK_SECRET
     # Exposing port 8080 for webhook access
     ports:
       - "8080:8080"  # Exposing webhook listener port
@@ -31,12 +31,12 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: always
+
 
 networks:
   puppeteer-net:
     external: true  # Using an external network for inter-service communication
 
 secrets:
-  webhook_secret:
+  WEBHOOK_SECRET:
     external: true  # Assumes this secret is already created in Portainer or Docker Swarm
