@@ -26,7 +26,7 @@ chmod 600 /tmp/deploy_key
 
 
 ### Load WEBHOOK_SECRET
-if [ -f /run/secrets/webhook_secret ]; then
+if [ -f /run/secrets/WEBHOOK_SECRET ]; then
   export WEBHOOK_SECRET=$(cat /run/secrets/WEBHOOK_SECRET)
   echo "Loaded WEBHOOK_SECRET from /run/secrets"
 elif [ -n "$WEBHOOK_SECRET" ]; then
@@ -37,8 +37,8 @@ else
 fi
 
 # Optional: write to temp file (if you ever need it in scripts)
-echo "$WEBHOOK_SECRET" > /tmp/webhook_secret
-chmod 600 /tmp/webhook_secret
+echo "$WEBHOOK_SECRET" > /tmp/WEBHOOK_SECRET
+chmod 600 /tmp/WEBHOOK_SECRET
 
 # Run the actual command
 exec "$@"
