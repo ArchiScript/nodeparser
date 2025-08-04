@@ -36,7 +36,7 @@ else
   exit 1
 fi
 
-# Optional: write to temp file (if you ever need it in scripts)
+# Optional: write to temp file (if you ever need it in scripts) 
 echo "$WEBHOOK_SECRET" > /tmp/WEBHOOK_SECRET
 chmod 600 /tmp/WEBHOOK_SECRET
 
