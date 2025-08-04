@@ -27,7 +27,7 @@ chmod 600 /tmp/deploy_key
 
 ### Load WEBHOOK_SECRET
 if [ -f /run/secrets/webhook_secret ]; then
-  export WEBHOOK_SECRET=$(cat /run/secrets/webhook_secret)
+  export WEBHOOK_SECRET=$(cat /run/secrets/WEBHOOK_SECRET)
   echo "Loaded WEBHOOK_SECRET from /run/secrets"
 elif [ -n "$WEBHOOK_SECRET" ]; then
   echo "Using WEBHOOK_SECRET from environment"
