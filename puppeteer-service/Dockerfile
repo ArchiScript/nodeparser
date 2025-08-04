@@ -13,18 +13,12 @@ RUN npm install -g pm2
 # Copy the rest of the app, including ecosystem.config.js and entrypoint.sh
 COPY . .
 
-
-COPY ecosystem.config.js ./ecosystem.config.js
-
 # Make the entrypoint script executable
-COPY deploy/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-COPY deploy/deploy.sh /deploy.sh
-RUN chmod +x /deploy.sh
+RUN chmod +x deploy/entrypoint.sh
+RUN chmod +x deploy/deploy.sh
 
 # Use entrypoint script to handle secrets, setup, etc.
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["deploy/entrypoint.sh"]
 
 # Run app using PM2 in production mode
 CMD ["pm2-runtime", "ecosystem.config.js"]
