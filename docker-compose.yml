@@ -23,6 +23,7 @@ services:
       - WEBHOOK_SECRET_FILE=/run/secrets/webhook_secret
     secrets:
       - WEBHOOK_SECRET
+      - deploy_key
     # Exposing port 8080 for webhook access
     ports:
       - "8080:8080"  # Exposing webhook listener port
@@ -40,3 +41,5 @@ networks:
 secrets:
   WEBHOOK_SECRET:
     external: true  # Assumes this secret is already created in Portainer or Docker Swarm
+  deploy_key:
+    external: true  
