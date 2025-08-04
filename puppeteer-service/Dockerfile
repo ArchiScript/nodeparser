@@ -10,6 +10,9 @@ RUN npm install
 # Install PM2 globally
 RUN npm install -g pm2
 
+# Install required system packages for PM2 to function (e.g., `ps`)
+RUN apt-get update && apt-get install -y procps curl
+
 # Copy the rest of the app, including ecosystem.config.js and entrypoint.sh
 COPY . .
 
