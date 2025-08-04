@@ -17,7 +17,7 @@ module.exports = {
     },
     {
       name: "deploy-webhook",
-      script: "./deploy-webhook.js",
+      script: "./deploy/deploy-webhook.js",
       exec_mode: "fork", // webhook usually does not need cluster mode
       instances: 1,
       watch: false,
