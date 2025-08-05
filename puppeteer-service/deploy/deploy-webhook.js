@@ -2,10 +2,15 @@ const express = require('express');
 const { exec } = require('child_process');
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const SECRET = process.env.WEBHOOK_SECRET;
 
 app.use(express.json());
+
+app.get('/test', (req, res) => {
+    console.log('GET request received at /test');
+    res.send('Webhook server is running!');
+});
 
 app.post('/deploy', (req, res) => {
     const signature = req.headers['x-hub-signature'];
@@ -26,6 +31,6 @@ app.post('/deploy', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT,'0.0.0.0', () => {
     console.log(`Webhook server running on port ${PORT}`);
 });

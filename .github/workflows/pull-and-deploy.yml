@@ -15,5 +15,12 @@ jobs:
     steps:
       - name: Trigger Deploy Webhook
         run: |
-          curl -X POST https://your-server.com:9000/hooks/scraper-deploy \
-            -H "X-Hub-Signature: ${{ secrets.WEBHOOK_SECRET }}"
+          response=$(curl -s -w "\n%{http_code}" -X GET https://9eb7fcd6c642.ngrok-free.app/test \
+            -H "X-Hub-Signature: ${{ secrets.WEBHOOK_SECRET }}")
+          body=$(echo "$response" | sed '$d')
+          status=$(echo "$response" | tail -n1)
+
+          echo "Status: $status"
+          echo "Body: $body"
+
+          [ "$status" -eq 200 ]

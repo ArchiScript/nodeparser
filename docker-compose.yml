@@ -26,7 +26,11 @@ services:
       - deploy_key
     # Exposing port 8080 for webhook access
     ports:
-      - "8080:8080"  # Exposing webhook listener port
+      - target: 8080          # port *inside* the container
+        published: 8080       # port exposed on the host
+        protocol: tcp
+        mode: host 
+        
     healthcheck:
       test: ["CMD", "curl", "-f", "http://browserless:3000"]
       interval: 10s
