@@ -6,8 +6,8 @@ app.use('/test', require('./deploy/deploy-webhook'));
 app.get('/title', async (req, res) => {
   try {
     const browser = await puppeteer.connect({
-      // browserWSEndpoint: 'ws://browserless:3000'    // prod
-      browserWSEndpoint: 'ws://localhost:3000'
+      browserWSEndpoint: 'ws://browserless:3000'   
+      // browserWSEndpoint: 'ws://localhost:3000'
     });
 
     const page = await browser.newPage();
