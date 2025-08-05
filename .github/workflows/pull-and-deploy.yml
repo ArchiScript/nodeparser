@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'puppeteer-service/**' # Ignore Docker-related files
+      - 'puppeteer-service/**' 
 
 jobs:
   deploy:
