@@ -2,7 +2,7 @@ const express = require('express');
 const puppeteer = require('puppeteer');
 
 const app = express();
-app.use('/test', require('./deploy/deploy-webhook'));
+
 app.get('/title', async (req, res) => {
   try {
     const browser = await puppeteer.connect({
