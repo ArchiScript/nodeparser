@@ -23,7 +23,7 @@ app.post('/deploy', (req, res) => {
     exec('sh ./deploy.sh', (error, stdout, stderr) => {
         if (error) {
             console.error('[Deploy] Failed:', stderr);
-            return res.status(500).send('Deploy failed');
+           return res.status(500).send(`Deploy failed\n\nSTDERR:\n${stderr}\n\nSTDOUT:\n${stdout}`);
         }
 
         console.log('[Deploy] Success:\n', stdout);
