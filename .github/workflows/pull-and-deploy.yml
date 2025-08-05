@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Trigger Deploy Webhook
         run: |
-          response=$(curl -s -w "\n%{http_code}" -X GET https://9eb7fcd6c642.ngrok-free.app/test \
+          response=$(curl -s -w "\n%{http_code}" -X POST https://9eb7fcd6c642.ngrok-free.app/deploy \
             -H "X-Hub-Signature: ${{ secrets.WEBHOOK_SECRET }}")
           body=$(echo "$response" | sed '$d')
           status=$(echo "$response" | tail -n1)
