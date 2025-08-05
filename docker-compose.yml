@@ -15,6 +15,9 @@ services:
       - "3000:3000"  # Browserless service port
 
   scraper:
+    build:
+      context: .
+      dockerfile: puppeteer-service/Dockerfile
     image: ghcr.io/archiscript/puppeteer-scraper:latest
     networks:
       - puppeteer-net
